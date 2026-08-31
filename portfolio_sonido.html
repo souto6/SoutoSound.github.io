@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>David Souto — Sound Department Portfolio</title>
+<style>
+  *{box-sizing:border-box}
+  :root{
+    --bg:#0b0b0c;
+    --surface:#111113;
+    --surface2:#161618;
+    --border:#242426;
+    --border2:#2c2c2e;
+    --text:#f2f2f2;
+    --muted:#8a8a8e;
+    --muted2:#aaaaad;
+    --yellow:#f4c400;
+  }
+  body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif;line-height:1.5}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1120px;margin:auto;padding:0 28px}
+  nav{height:78px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+  .logo{font-weight:800;letter-spacing:.08em;font-size:14px}
+  .logo span{color:var(--yellow)}
+  nav .links{display:flex;align-items:center;gap:28px;color:#aaa;font-size:13px}
+  nav .links a:hover{color:#fff}
+  .langsw{display:flex;gap:2px;border:1px solid var(--border2);border-radius:100px;padding:3px}
+  .langsw button{border:none;background:transparent;color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.04em;padding:5px 10px;border-radius:100px;cursor:pointer;font-family:inherit}
+  .langsw button.active{background:var(--yellow);color:#0b0b0c}
+  .hero{min-height:590px;display:grid;grid-template-columns:1.2fr .8fr;align-items:center;gap:60px}
+  .eyebrow{color:var(--muted);text-transform:uppercase;letter-spacing:.18em;font-size:12px}
+  h1{font-size:clamp(52px,8vw,94px);line-height:.92;margin:18px 0 25px;letter-spacing:-.055em}
+  h1 em{color:var(--yellow);font-style:normal}
+  .hero p{font-size:19px;color:var(--muted2);max-width:610px}
+  .roles{margin-top:32px;display:flex;gap:9px;flex-wrap:wrap}
+  .pill{border:1px solid var(--border2);border-radius:100px;padding:8px 13px;color:#ccc;font-size:12px}
+  .hero-card{height:430px;background:linear-gradient(145deg,#1c1a10,#0e0e0f);border:1px solid var(--border2);display:flex;align-items:flex-end;padding:25px;position:relative;overflow:hidden}
+  .hero-card:before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:var(--yellow);opacity:.14;top:55px;right:-60px;filter:blur(1px)}
+  .hero-card:after{content:"";position:absolute;width:130px;height:390px;background:#161618;border-left:1px solid var(--border2);transform:rotate(28deg);left:55px;top:30px}
+  .card-label{position:relative;z-index:2;font-size:11px;color:var(--muted);letter-spacing:.16em;text-transform:uppercase}
+  section{padding:100px 0;border-top:1px solid var(--border)}
+  .section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:42px}
+  h2{font-size:42px;letter-spacing:-.04em;margin:0}
+  .muted{color:var(--muted);font-size:14px}
+  .projects{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  .project{border:1px solid var(--border2);background:var(--surface);transition:.2s}
+  .project:hover{transform:translateY(-3px);border-color:var(--yellow)}
+  .thumb{height:260px;background:linear-gradient(135deg,#242420,#171719);display:flex;align-items:flex-end;padding:20px;color:#aaa;font-size:11px;letter-spacing:.12em;text-transform:uppercase;background-size:cover;background-position:center}
+  .pbody{padding:25px}
+  .pbody h3{font-size:24px;margin:0 0 8px}
+  .meta{font-size:12px;color:var(--muted);margin-bottom:18px}
+  .pbody p{color:#aaa;font-size:14px;margin:0 0 20px}
+  .credit{display:inline-block;font-size:11px;border:1px solid var(--border2);border-radius:4px;padding:7px 9px;color:var(--yellow);font-weight:700}
+  .featured{grid-column:span 2;display:grid;grid-template-columns:1fr 1fr}
+  .featured .thumb{height:100%}
+  .about{display:grid;grid-template-columns:1fr 1fr;gap:70px}
+  .about p{color:#aaa;font-size:17px}
+  .gear{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:30px}
+  .gear div{border:1px solid var(--border2);padding:18px;color:#bbb;font-size:13px}
+  .contact{display:flex;justify-content:space-between;align-items:center;gap:30px}
+  .contact h2{max-width:650px}
+  .button{display:inline-block;background:var(--yellow);color:#0b0b0c;padding:14px 20px;font-weight:700;font-size:13px;border-radius:2px}
+  footer{padding:30px 0;color:#666;font-size:12px;border-top:1px solid var(--border);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  [data-i18n]{display:none}
+  html[data-lang="es"] [data-i18n="es"],
+  html[data-lang="en"] [data-i18n="en"],
+  html[data-lang="ca"] [data-i18n="ca"]{display:inline}
+  span[data-i18n], em[data-i18n]{display:none}
+  html[data-lang="es"] span[data-i18n="es"], html[data-lang="es"] em[data-i18n="es"],
+  html[data-lang="en"] span[data-i18n="en"], html[data-lang="en"] em[data-i18n="en"],
+  html[data-lang="ca"] span[data-i18n="ca"], html[data-lang="ca"] em[data-i18n="ca"]{display:inline}
+  p[data-i18n], div[data-i18n], h1[data-i18n], h2[data-i18n], h3[data-i18n]{display:none}
+  html[data-lang="es"] [data-i18n="es"]{display:block}
+  html[data-lang="en"] [data-i18n="en"]{display:block}
+  html[data-lang="ca"] [data-i18n="ca"]{display:block}
+  a[data-i18n]{display:inline-block}
+  html[data-lang="es"] a[data-i18n="es"]{display:inline-block}
+  html[data-lang="en"] a[data-i18n="en"]{display:inline-block}
+  html[data-lang="ca"] a[data-i18n="ca"]{display:inline-block}
+  @media(max-width:760px){
+    .hero,.about,.featured{grid-template-columns:1fr}
+    .hero{padding:70px 0}
+    .hero-card{height:300px}
+    .projects{grid-template-columns:1fr}
+    .featured{grid-column:span 1}
+    .featured .thumb{height:260px}
+    .gear{grid-template-columns:1fr 1fr}
+    .contact{align-items:flex-start;flex-direction:column}
+    nav .links a.nav-link{display:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav>
+  <div class="logo">DAVID SOUTO / <span>SOUND</span></div>
+  <div class="links">
+    <a class="nav-link" href="#work"><span data-i18n="es">Trabajo</span><span data-i18n="en">Work</span><span data-i18n="ca">Feina</span></a>
+    <a class="nav-link" href="#about"><span data-i18n="es">Sobre mí</span><span data-i18n="en">About</span><span data-i18n="ca">Sobre mi</span></a>
+    <a class="nav-link" href="#contact"><span data-i18n="es">Contacto</span><span data-i18n="en">Contact</span><span data-i18n="ca">Contacte</span></a>
+    <div class="langsw">
+      <button data-set-lang="es">ES</button>
+      <button data-set-lang="en">EN</button>
+      <button data-set-lang="ca">CA</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div>
+    <div class="eyebrow">
+      <span data-i18n="es">Departamento de sonido · Barcelona</span>
+      <span data-i18n="en">Sound Department · Barcelona</span>
+      <span data-i18n="ca">Departament de so · Barcelona</span>
+    </div>
+    <h1>
+      <span data-i18n="es">Sonido<br>para imagen.</span>
+      <span data-i18n="en">Sound<br>for picture.</span>
+      <span data-i18n="ca">So<br>per a imatge.</span>
+    </h1>
+    <p data-i18n="es">Técnico de sonido especializado en sonido directo, operación de pértiga y dirección de sonido para cine, documental y publicidad.</p>
+    <p data-i18n="en">Technical sound professional focused on production sound, boom operation and sound direction for film, documentary and advertising.</p>
+    <p data-i18n="ca">Tècnic de so especialitzat en so directe, operació de perxa i direcció de so per a cinema, documental i publicitat.</p>
+    <div class="roles">
+      <span class="pill" data-i18n="es">Técnico de sonido</span>
+      <span class="pill" data-i18n="en">Sound Mixer</span>
+      <span class="pill" data-i18n="ca">Tècnic de so</span>
+      <span class="pill" data-i18n="es">Operador de pértiga</span>
+      <span class="pill" data-i18n="en">Boom Operator</span>
+      <span class="pill" data-i18n="ca">Operador de perxa</span>
+      <span class="pill" data-i18n="es">Director de sonido</span>
+      <span class="pill" data-i18n="en">Sound Director</span>
+      <span class="pill" data-i18n="ca">Director de so</span>
+      <span class="pill" data-i18n="es">Sonido de localización</span>
+      <span class="pill" data-i18n="en">Location Sound</span>
+      <span class="pill" data-i18n="ca">So de localització</span>
+    </div>
+  </div>
+  <div class="hero-card">
+    <div class="card-label">Portfolio / 2023—2026</div>
+  </div>
+</header>
+
+<section id="work">
+  <div class="section-head">
+    <h2>
+      <span data-i18n="es">Trabajo seleccionado</span>
+      <span data-i18n="en">Selected work</span>
+      <span data-i18n="ca">Feina seleccionada</span>
+    </h2>
+    <div class="muted">
+      <span data-i18n="es">01 — 04 / Ficción · Documental · Publicidad</span>
+      <span data-i18n="en">01 — 04 / Fiction · Documentary · Advertising</span>
+      <span data-i18n="ca">01 — 04 / Ficció · Documental · Publicitat</span>
+    </div>
+  </div>
+
+  <div class="projects">
+    <!-- PROYECTO 1 (destacado) -->
+    <article class="project featured">
+      <div class="thumb">
+        <span data-i18n="es">IMAGEN / FOTOGRAMA DE RODAJE</span>
+        <span data-i18n="en">STILL / ON-SET PHOTO</span>
+        <span data-i18n="ca">IMATGE / FOTOGRAMA DE RODATGE</span>
+      </div>
+      <div class="pbody">
+        <div class="meta">
+          <span data-i18n="es">Cortometraje · 2026 · 18 min</span>
+          <span data-i18n="en">Short film · 2026 · 18 min</span>
+          <span data-i18n="ca">Curtmetratge · 2026 · 18 min</span>
+        </div>
+        <h3>La última llamada</h3>
+        <p data-i18n="es">Drama de ficción rodado en localizaciones interiores y exteriores. Responsable del departamento de sonido directo, coordinación de microfonía inalámbrica y grabación multipista.</p>
+        <p data-i18n="en">Fiction drama shot across interior and exterior locations. Responsible for the production sound department, wireless mic coordination and multitrack recording.</p>
+        <p data-i18n="ca">Drama de ficció rodat en localitzacions interiors i exteriors. Responsable del departament de so directe, coordinació de microfonia sense fils i gravació multipista.</p>
+        <span class="credit">
+          <span data-i18n="es">TÉCNICO DE SONIDO · DIRECTOR DE SONIDO</span>
+          <span data-i18n="en">SOUND MIXER · SOUND DIRECTOR</span>
+          <span data-i18n="ca">TÈCNIC DE SO · DIRECTOR DE SO</span>
+        </span>
+      </div>
+    </article>
+
+    <!-- PROYECTO 2 -->
+    <article class="project">
+      <div class="thumb">
+        <span data-i18n="es">CARTEL / FOTO</span>
+        <span data-i18n="en">POSTER / PHOTO</span>
+        <span data-i18n="ca">CARTELL / FOTO</span>
+      </div>
+      <div class="pbody">
+        <div class="meta">
+          <span data-i18n="es">Documental · 2025 · 42 min</span>
+          <span data-i18n="en">Documentary · 2025 · 42 min</span>
+          <span data-i18n="ca">Documental · 2025 · 42 min</span>
+        </div>
+        <h3>Entre dos mares</h3>
+        <p data-i18n="es">Documental observacional con entrevistas y sonido de ambiente en distintas localizaciones.</p>
+        <p data-i18n="en">Observational documentary with interviews and ambient sound across several locations.</p>
+        <p data-i18n="ca">Documental observacional amb entrevistes i so ambiental en diverses localitzacions.</p>
+        <span class="credit">
+          <span data-i18n="es">SONIDO DE LOCALIZACIÓN · OPERADOR DE PÉRTIGA</span>
+          <span data-i18n="en">LOCATION SOUND · BOOM OPERATOR</span>
+          <span data-i18n="ca">SO DE LOCALITZACIÓ · OPERADOR DE PERXA</span>
+        </span>
+      </div>
+    </article>
+
+    <!-- PROYECTO 3 -->
+    <article class="project">
+      <div class="thumb">
+        <span data-i18n="es">CARTEL / FOTO</span>
+        <span data-i18n="en">POSTER / PHOTO</span>
+        <span data-i18n="ca">CARTELL / FOTO</span>
+      </div>
+      <div class="pbody">
+        <div class="meta">
+          <span data-i18n="es">Cortometraje · 2025 · 12 min</span>
+          <span data-i18n="en">Short film · 2025 · 12 min</span>
+          <span data-i18n="ca">Curtmetratge · 2025 · 12 min</span>
+        </div>
+        <h3>Frecuencia</h3>
+        <p data-i18n="es">Producción de ficción con escenas dialogadas y grabación de ambientes para continuidad sonora.</p>
+        <p data-i18n="en">Fiction production with dialogue-heavy scenes and ambience recording for sound continuity.</p>
+        <p data-i18n="ca">Producció de ficció amb escenes dialogades i gravació d'ambients per a continuïtat sonora.</p>
+        <span class="credit">
+          <span data-i18n="es">OPERADOR DE PÉRTIGA · TÉCNICO DE SONIDO</span>
+          <span data-i18n="en">BOOM OPERATOR · SOUND MIXER</span>
+          <span data-i18n="ca">OPERADOR DE PERXA · TÈCNIC DE SO</span>
+        </span>
+      </div>
+    </article>
+
+    <!-- PROYECTO 4 -->
+    <article class="project">
+      <div class="thumb">
+        <span data-i18n="es">CARTEL / FOTO</span>
+        <span data-i18n="en">POSTER / PHOTO</span>
+        <span data-i18n="ca">CARTELL / FOTO</span>
+      </div>
+      <div class="pbody">
+        <div class="meta">
+          <span data-i18n="es">Publicidad · 2024 · 60 seg</span>
+          <span data-i18n="en">Advertising · 2024 · 60 sec</span>
+          <span data-i18n="ca">Publicitat · 2024 · 60 seg</span>
+        </div>
+        <h3>Distrito 22</h3>
+        <p data-i18n="es">Spot publicitario rodado en exteriores con varios protagonistas y sistema inalámbrico multicanal.</p>
+        <p data-i18n="en">Advertising spot shot outdoors with several leads and a multichannel wireless system.</p>
+        <p data-i18n="ca">Espot publicitari rodat en exteriors amb diversos protagonistes i sistema sense fils multicanal.</p>
+        <span class="credit">
+          <span data-i18n="es">TÉCNICO DE SONIDO</span>
+          <span data-i18n="en">SOUND MIXER</span>
+          <span data-i18n="ca">TÈCNIC DE SO</span>
+        </span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-head">
+    <h2>
+      <span data-i18n="es">Sobre mí</span>
+      <span data-i18n="en">About</span>
+      <span data-i18n="ca">Sobre mi</span>
+    </h2>
+    <div class="muted">
+      <span data-i18n="es">02 — Perfil</span>
+      <span data-i18n="en">02 — Profile</span>
+      <span data-i18n="ca">02 — Perfil</span>
+    </div>
+  </div>
+  <div class="about">
+    <div>
+      <p data-i18n="es">Soy técnico de sonido especializado en el ámbito audiovisual, con experiencia en sonido directo, operación de pértiga y coordinación del departamento de sonido en rodaje.</p>
+      <p data-i18n="en">I'm a sound technician specialized in the audiovisual field, with experience in production sound, boom operation and coordinating the sound department on set.</p>
+      <p data-i18n="ca">Sóc tècnic de so especialitzat en l'àmbit audiovisual, amb experiència en so directe, operació de perxa i coordinació del departament de so en rodatge.</p>
+      <p data-i18n="es">Me interesa especialmente trabajar en equipos de rodaje donde el sonido tenga un papel cuidado y técnicamente sólido, adaptándome a las necesidades de cada producción.</p>
+      <p data-i18n="en">I'm especially interested in working with crews where sound is treated carefully and with technical rigor, adapting to the needs of each production.</p>
+      <p data-i18n="ca">M'interessa especialment treballar en equips de rodatge on el so tingui un paper acurat i tècnicament sòlid, adaptant-me a les necessitats de cada producció.</p>
+    </div>
+    <div>
+      <div class="eyebrow">
+        <span data-i18n="es">Equipo y habilidades</span>
+        <span data-i18n="en">Equipment & skills</span>
+        <span data-i18n="ca">Equip i habilitats</span>
+      </div>
+      <div class="gear">
+        <div>Zoom F6 / F8</div>
+        <div>Wireless Systems</div>
+        <div><span data-i18n="es">Operación de pértiga</span><span data-i18n="en">Boom Operation</span><span data-i18n="ca">Operació de perxa</span></div>
+        <div>Lavaliers</div>
+        <div><span data-i18n="es">Grabación en localización</span><span data-i18n="en">Location Recording</span><span data-i18n="ca">Gravació en localització</span></div>
+        <div><span data-i18n="es">Reportes de sonido</span><span data-i18n="en">Sound Reports</span><span data-i18n="ca">Informes de so</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact">
+    <div>
+      <div class="eyebrow">
+        <span data-i18n="es">Disponible para proyectos</span>
+        <span data-i18n="en">Available for projects</span>
+        <span data-i18n="ca">Disponible per a projectes</span>
+      </div>
+      <h2>
+        <span data-i18n="es">¿Tienes un rodaje?<br>Hablemos.</span>
+        <span data-i18n="en">Got a shoot?<br>Let's talk.</span>
+        <span data-i18n="ca">Tens un rodatge?<br>Parlem-ne.</span>
+      </h2>
+      <p class="muted">
+        <span data-i18n="es">Barcelona · España · Disponibilidad para desplazamientos</span>
+        <span data-i18n="en">Barcelona · Spain · Available to travel</span>
+        <span data-i18n="ca">Barcelona · Espanya · Disponibilitat per a desplaçaments</span>
+      </p>
+    </div>
+    <a class="button" href="mailto:hello@davidsouto.com">
+      <span data-i18n="es">CONTACTAR →</span>
+      <span data-i18n="en">GET IN TOUCH →</span>
+      <span data-i18n="ca">CONTACTAR →</span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div>© 2026 David Souto — <span data-i18n="es">Departamento de sonido</span><span data-i18n="en">Sound Department</span><span data-i18n="ca">Departament de so</span></div>
+</footer>
+</div>
+
+<script>
+  var buttons = document.querySelectorAll('[data-set-lang]');
+  function setLang(lang){
+    document.documentElement.setAttribute('data-lang', lang);
+    document.documentElement.setAttribute('lang', lang);
+    buttons.forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-set-lang') === lang);
+    });
+  }
+  buttons.forEach(function(b){
+    b.addEventListener('click', function(){ setLang(b.getAttribute('data-set-lang')); });
+  });
+  setLang('es');
+</script>
+</body>
+</html>
